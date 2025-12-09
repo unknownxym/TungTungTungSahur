@@ -11,26 +11,22 @@
     <link href="assets/css/main.css" rel="stylesheet">
 
     <style>
-        /* Style for the unmute button overlay */
+        /* Smaller, less intrusive unmute/mute button */
         #unmute-overlay {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            z-index: 30; /* Ensure it's above the video but below content */
+            position: fixed; /* stays in corner */
+            bottom: 20px;
+            right: 20px;
+            z-index: 30; 
             cursor: pointer;
             background-color: rgba(0, 0, 0, 0.5);
             color: white;
-            padding: 15px 25px;
-            border-radius: 10px;
-            font-size: 24px;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 16px;
             transition: opacity 0.3s ease;
         }
         #unmute-overlay:hover {
             opacity: 0.8;
-        }
-        .hidden {
-            display: none !important;
         }
     </style>
 </head>
@@ -39,10 +35,8 @@
 <!-- Video starts muted to allow autoplay -->
 <video autoplay loop muted playsinline id="video-background" class="absolute left-0 top-0 z-20 h-full w-full object-cover" src="Video.mp4"></video>
 
-<!-- Unmute button overlay -->
-<div id="unmute-overlay">
-    🔊 Click to Unmute
-</div>
+<!-- Unmute/Mute button -->
+<div id="unmute-overlay">Unmute</div>
 
 <div id="particles-js"></div>
 
@@ -58,20 +52,21 @@
 <script src="assets/js/app.js"></script>
 
 <script>
-    // --- Unmute Script ---
     const video = document.getElementById('video-background');
     const unmuteOverlay = document.getElementById('unmute-overlay');
 
-    // Function to unmute the video and hide the button
-    function enableAudio() {
-        video.muted = false;
-        unmuteOverlay.classList.add('hidden');
-        // It's good practice to call play() after user interaction
+    function toggleAudio() {
+        if(video.muted){
+            video.muted = false;
+            unmuteOverlay.textContent = 'Mute';
+        } else {
+            video.muted = true;
+            unmuteOverlay.textContent = 'Unmute';
+        }
         video.play();
     }
 
-    // Add a click event listener to the overlay
-    unmuteOverlay.addEventListener('click', enableAudio);
+    unmuteOverlay.addEventListener('click', toggleAudio);
 </script>
 
 <script src="cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" defer></script>
