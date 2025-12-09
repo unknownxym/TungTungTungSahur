@@ -3,21 +3,51 @@
 <head>
     <meta charset="UTF-8">
     <title><3</title>
-    <meta content="xym" property="og:title">
-    <meta content="xym - biolink" property="og:description">
+    <meta content="tung" property="og:title">
+    <meta content="tung - biolink" property="og:description">
     <meta content="#00e1ff" name="theme-color">
 
     <script src="assets/js/titlechange.js"></script>
     <link href="assets/css/main.css" rel="stylesheet">
+
+    <style>
+        /* Style for the unmute button overlay */
+        #unmute-overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 30; /* Ensure it's above the video but below content */
+            cursor: pointer;
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 10px;
+            font-size: 24px;
+            transition: opacity 0.3s ease;
+        }
+        #unmute-overlay:hover {
+            opacity: 0.8;
+        }
+        .hidden {
+            display: none !important;
+        }
+    </style>
 </head>
 <body>
 
-<!-- The src is now "Video.mp4" and autoplay/muted are added -->
-<video autoplay loop playsinline id="video-background" class="absolute left-0 top-0 z-20 h-full w-full object-cover" src="Video.mp4"></video>
+<!-- Video starts muted to allow autoplay -->
+<video autoplay loop muted playsinline id="video-background" class="absolute left-0 top-0 z-20 h-full w-full object-cover" src="Video.mp4"></video>
+
+<!-- Unmute button overlay -->
+<div id="unmute-overlay">
+    🔊 Click to Unmute
+</div>
 
 <div id="particles-js"></div>
 
-<div class="center">
+<!-- Your content needs a higher z-index to be on top -->
+<div class="center" style="z-index: 25; position: relative;">
     <h1>Tung Tung Tung Sahur</h1>
     <p>T³</p>
     <br>
@@ -26,6 +56,24 @@
 
 <script src="assets/js/custom.js"></script>
 <script src="assets/js/app.js"></script>
+
+<script>
+    // --- Unmute Script ---
+    const video = document.getElementById('video-background');
+    const unmuteOverlay = document.getElementById('unmute-overlay');
+
+    // Function to unmute the video and hide the button
+    function enableAudio() {
+        video.muted = false;
+        unmuteOverlay.classList.add('hidden');
+        // It's good practice to call play() after user interaction
+        video.play();
+    }
+
+    // Add a click event listener to the overlay
+    unmuteOverlay.addEventListener('click', enableAudio);
+</script>
+
 <script src="cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" defer></script>
 
 </body>
