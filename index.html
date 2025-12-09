@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>conspiracy!</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: #000;
+      color: white;
+      font-family: monospace;
+      position: relative;
+    }
+
+    video#bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: -2;
+    }
+
+    #content {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      z-index: 10;
+    }
+
+    a {
+      color: #ff66ff;
+      text-decoration: none;
+      font-size: 1.2em;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .line {
+      margin: 12px 0;
+      font-size: 1.1em;
+    }
+  </style>
+</head>
+<body>
+  <video id="bg" autoplay muted loop playsinline>
+    <source src="video.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+
+  <div id="content">
+    <div class="line"><a href="#">click here ♥</a></div>
+    <div class="line">conspiracy!</div>
+    <div class="line">c++ developer</div>
+    <div class="line">i love cats.</div>
+    <div class="line">Vixen</div>
+    <div class="line"><a href="https://github.com" target="_blank">Github</a></div>
+  </div>
+
+  <audio id="bgm" src="audio.mp3" preload="auto"></audio>
+
+  <script>
+    // Play audio on first user interaction
+    const bgm = document.getElementById('bgm');
+    let audioPlayed = false;
+
+    const playAudio = () => {
+      if (!audioPlayed) {
+        bgm.volume = 0.5;
+        bgm.play().catch(e => console.log("Audio play failed:", e));
+        audioPlayed = true;
+      }
+    };
+
+    // Add event listeners to the whole document
+    document.addEventListener('click', playAudio);
+    document.addEventListener('touchstart', playAudio);
+  </script>
+</body>
+</html>
