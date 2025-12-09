@@ -11,37 +11,79 @@
     <link href="assets/css/main.css" rel="stylesheet">
 
     <style>
-        /* Smaller, less intrusive unmute/mute button */
+        /* Reset default margins/padding and make sure body takes full height */
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow-x: hidden;
+        }
+
+        /* Video background */
+        #video-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 1;
+        }
+
+        /* Smaller, unobtrusive unmute/mute button */
         #unmute-overlay {
-            position: fixed; /* stays in corner */
-            bottom: 20px;
-            right: 20px;
-            z-index: 30; 
+            position: fixed;
+            bottom: 50px;
+            right: 50px;
+            z-index: 50; 
             cursor: pointer;
-            background-color: rgba(0, 0, 0, 0.5);
+            background-color: rgba(0, 0, 0, 0.6);
             color: white;
-            padding: 8px 16px;
-            border-radius: 8px;
-            font-size: 16px;
+            padding: 8px 14px;
+            border-radius: 6px;
+            font-size: 14px;
             transition: opacity 0.3s ease;
         }
         #unmute-overlay:hover {
             opacity: 0.8;
+        }
+
+        /* Centered content on top of video */
+        .center {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            color: white;
+            padding: 40px 20px; /* safe padding so text doesn't go off-screen */
+        }
+
+        .skush {
+            font-size: 18px;
+        }
+
+        #particles-js {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 5; /* behind content, above video */
         }
     </style>
 </head>
 <body>
 
 <!-- Video starts muted to allow autoplay -->
-<video autoplay loop muted playsinline id="video-background" class="absolute left-0 top-0 z-20 h-full w-full object-cover" src="Video.mp4"></video>
+<video autoplay loop muted playsinline id="video-background" src="Video.mp4"></video>
 
 <!-- Unmute/Mute button -->
 <div id="unmute-overlay">Unmute</div>
 
+<!-- Particle background -->
 <div id="particles-js"></div>
 
-<!-- Your content needs a higher z-index to be on top -->
-<div class="center" style="z-index: 25; position: relative;">
+<!-- Your content -->
+<div class="center">
     <h1>Tung Tung Tung Sahur</h1>
     <p>T³</p>
     <br>
