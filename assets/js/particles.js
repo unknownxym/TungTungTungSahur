@@ -55,7 +55,7 @@ var pJS = function(e, a) {
             line_linked: {
                 enable: !0,
                 distance: 100,
-                color: "#00ffe1",
+                color: "#966651",
                 opacity: 1,
                 width: 1
             },
